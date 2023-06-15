@@ -28,7 +28,7 @@ int main(){
     if(opt == 1){
         system("cls");
         printf("Enter your name:\t");
-        scanf("%[^\n]",usr.name);
+        scanf("%[^\n]", usr.name);
         printf("Enter your account number:\t");
         scanf("%s",usr.ac);
         printf("Enter your phone number:\t");
@@ -48,11 +48,11 @@ int main(){
     }
     if(opt == 2){
         system("clear");
-        printf("\nPhone number:\t");
+        printf("\nAccount number:\t");
         scanf("%s",ac);
         printf("Password:\t");
         scanf("%s",pword);
-        strcpy(filename,phone);
+        strcpy(filename,ac);
         fp = fopen(strcat(filename,".dat"),"r");
         if(fp == NULL){
             printf("\nAccount number not registered");
@@ -63,12 +63,13 @@ int main(){
         if(!strcmp(pword,usr.password)){
             printf("\n\t\tWelcome %s",usr.name);;
             while(cont == 'y'){
-                system("clear");
+                system("cls");
                 printf("\n1.Balance check");
                 printf("\n2.Deposit money");
                 printf("\n3.Withdraw money");
                 printf("\n4.Transfer money");
                 printf("\n5.Change password");
+                printf("\n6.Account details");
                 printf("\n\nEnter your choice:\t");
                 scanf("%d",&choice);
 
@@ -138,6 +139,9 @@ int main(){
                         printf("\nPassword succesfully changed");
                         }
                     break;
+                 case 6:
+                    fp = fopen(filename, "w");
+                    printf("Account number: %s", usr.ac);
                 default:
                     printf("\nInvalid option");
                 }
