@@ -7,7 +7,7 @@ struct user {
     char phone[50];
     char ac[50];
     char password[50];
-    float balance;
+    double balance;
 };
 
 int main(){
@@ -17,7 +17,7 @@ int main(){
     int opt,choice;
     char cont = 'y';
     float amount;
-
+    printf("\n\n\n\t\t\t\tWelcome to Maze Bank");
     printf("\nWhat do you want to do?");
     printf("\n\n1. Register an account");
     printf("\n2. Login to an account");
@@ -28,7 +28,7 @@ int main(){
     if(opt == 1){
         system("cls");
         printf("Enter your name:\t");
-        scanf("%[^\n]", usr.name);
+        scanf(" %[^\n]",usr.name);
         printf("Enter your account number:\t");
         scanf("%s",usr.ac);
         printf("Enter your phone number:\t");
@@ -47,7 +47,7 @@ int main(){
         fclose(fp);
     }
     if(opt == 2){
-        system("clear");
+        system("cls");
         printf("\nAccount number:\t");
         scanf("%s",ac);
         printf("Password:\t");
@@ -74,10 +74,13 @@ int main(){
                 scanf("%d",&choice);
 
                 switch(choice){
+
                     case 1:
-                        printf("\nYour current balance is %.2f Tk\n",usr.balance);
+                        system("cls");
+                        printf("\nYour current balance is %.2lf Tk\n",usr.balance);
                         break;
                     case 2:
+                        system("cls");
                         printf("\nEnter the amount:\t");
                         scanf("%f",&amount);
                         usr.balance += amount;
@@ -87,21 +90,23 @@ int main(){
                         fclose(fp);
                         break;
                     case 3:
+                        system("cls");
                         printf("\nEnter the amount:\t");
                         scanf("%f",&amount);
                         usr.balance -= amount;
                         fp = fopen(filename,"w");
                         fwrite(&usr,sizeof(struct user),1,fp);
-                        if(fwrite != NULL) printf("\nYou have withdrawn Rs.%.2f",amount);
+                        if(fwrite != NULL) printf("\nYou have withdrawn %.2f Tk",amount);
                         fclose(fp);
                         break;
 
                     case 4:
-                        printf("\nPlease enter the phone number to transfer the balance:\t");
-                        scanf("%s",phone);
+                        system("cls");
+                        printf("\nPlease enter the account number to transfer the balance:\t");
+                        scanf("%s",ac);
                         printf("\nPlease enter the amount to transfer:\t");
                         scanf("%f",&amount);
-                        strcpy(filename,phone);
+                        strcpy(filename,ac);
                         fp = fopen(strcat(filename,".dat"),"r");
                         if(fp == NULL) printf("\nAccount number not registered");
                         else {
@@ -112,14 +117,15 @@ int main(){
                         else {
 
 
+
                             fp = fopen(filename,"w");
                             usr1.balance += amount;
                             fwrite(&usr1,sizeof(struct user),1,fp);
 
                             fclose(fp);
                             if(fwrite != NULL){
-                                printf("\nYou have succesfully transfered Rs.%.2f to %s",amount,phone);
-                                strcpy(filename,usr.phone);
+                                printf("\nYou have succesfully transfered %.2f Tk to %s",amount,ac);
+                                strcpy(filename,usr.ac);
                                 fp = fopen(strcat(filename,".dat"),"w");
                                 usr.balance -= amount;
                                 fwrite(&usr,sizeof(struct user),1,fp);
@@ -130,6 +136,7 @@ int main(){
                         }
                         break;
                  case 5:
+                     system("cls");
                         printf("\nPlease enter your new password:\t");
                         scanf("%s",pword);
                         fp = fopen(filename,"w");
@@ -140,8 +147,12 @@ int main(){
                         }
                     break;
                  case 6:
-                    fp = fopen(filename, "w");
+                     system("cls");
                     printf("Account number: %s", usr.ac);
+                    printf("\nYour name: %s", usr.name);
+                    printf("\nPhone number: %s", usr.phone);
+                    printf("\nCurrent balance: %.2lf", usr.balance);
+                   break;
                 default:
                     printf("\nInvalid option");
                 }
