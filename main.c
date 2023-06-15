@@ -10,11 +10,13 @@ struct user {
     double balance;
 };
 
+
 int main(){
     struct user usr,usr1;
     FILE *fp;
-    char filename[50],phone[50],pword[50], ac[50];
-    int opt,choice;
+    char filename[50],phone[50],pword[50], ac[50], nver[50], phonever[50], nac[50];
+    int opt,choice, t;
+    int count=0;
     char cont = 'y';
     float amount;
     printf("\n\n\n\t\t\t\tWelcome to Maze Bank");
@@ -162,13 +164,50 @@ int main(){
                 scanf("%s",&cont);
 
             }
+            while (cont == 'n'){
+                printf("Thank you for your time.\n");
+                printf("Press any key to close the software.\n");
+            }
         }
         else {
-            printf("\nInvalid password");
+            printf("\nInvalid password\n");
+            printf("1.Reset password\n");
+            printf("2.Exit\n");
+            scanf("%d", &t);
+            if(t==1){
+                    system("cls");
+            printf("\nAccount number:\t");
+            scanf("%s",nac);
+            if(!strcmp(nac,usr.ac)){
+                printf("Enter your name:\t");
+                scanf(" %[^\n]", &nver);
+                if(!strcmp(nver,usr.name)){
+                            printf("Enter your phone number:\t");
+                            scanf("%s",phonever);
+                    if(!strcmp(phonever,usr.phone)){
+                        system("cls");
+                        printf("\nPlease enter your new password:\t");
+                        scanf("%s",pword);
+                        fp = fopen(filename,"w");
+                        strcpy(usr.password,pword);
+                        fwrite(&usr,sizeof(struct user),1,fp);
+                        if(fwrite != NULL){
+                        printf("\nPassword succesfully changed");
+                        }
+
+                    }
+                }
+            }
+            if(t==2){
+                    system("cls");
+                printf("Press any key to close the software\n");
+            }
+          }
+        }
+
         }
         }
 
-    }
 
 
     return 0;
