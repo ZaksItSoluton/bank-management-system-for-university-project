@@ -28,7 +28,7 @@ int main(){
     if(opt == 1){
         system("cls");
         printf("Enter your name:\t");
-        scanf("%[^\n]",usr.name);
+        scanf(" %[^\n]",usr.name);
         printf("Enter your account number:\t");
         scanf("%s",usr.ac);
         printf("Enter your phone number:\t");
